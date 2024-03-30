@@ -35,10 +35,22 @@ jobs:
         comparison-method: exact
         timeout: 10
         max-score: 10
+    - name: FizzBuzz test2
+      id: fizzbuzz-test2
+      uses: education/autograding-io-grader@v1
+      with:
+        test-name: FizzBuzz test2
+        setup-command: ''
+        command: "./test/fizzbuzz.sh 1"
+        input: ''
+        expected-output: '1'
+        comparison-method: exact
+        timeout: 10
     - name: Autograding Reporter
       uses: education/autograding-grading-reporter@v1
       env:
         HELLO-WORLD-TEST_RESULTS: "${{steps.hello-world-test.outputs.result}}"
         FIZZBUZZ-TEST_RESULTS: "${{steps.fizzbuzz-test.outputs.result}}"
+        FIZZBUZZ-TEST2_RESULTS: "${{steps.fizzbuzz-test2.outputs.result}}"
       with:
-        runners: hello-world-test,fizzbuzz-test
+        runners: hello-world-test,fizzbuzz-test,fizzbuzz-test2
